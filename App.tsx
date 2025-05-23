@@ -117,7 +117,8 @@ const App: React.FC = () => {
 
     setDynamicTextColor(textColor);
 
-    const currentDarkeningFactor = Math.min(0.75, searchCount * 0.05);
+    const currentDarkeningFactor = 0.1; // Or any small fixed value
+
     const { from: baseFrom, via: baseVia, to: baseTo } = baseGradientColors;
 
     const from = darkenHexColor(baseFrom, currentDarkeningFactor);
