@@ -74,10 +74,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       className="w-full max-w-md mx-auto mb-6 sm:mb-8 relative"
       ref={searchBarRef}
     >
-      <form
-        onSubmit={handleSubmit}
-        className="flex items-center space-x-2 w-full p-1 bg-white/15 backdrop-blur-lg rounded-full shadow-xl"
-      >
+      <form onSubmit={handleSubmit} className="relative w-full">
         <input
           type="text"
           value={cityInput}
@@ -86,14 +83,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
             if (e.target.value.length > 0 && history.length > 0) {
               setShowSuggestions(true);
             } else if (e.target.value.length === 0 && history.length > 0) {
-              setShowSuggestions(true); // Show all history if input is cleared but still focused
+              setShowSuggestions(true);
             } else {
               setShowSuggestions(false);
             }
           }}
           onFocus={() => history.length > 0 && setShowSuggestions(true)}
           placeholder="Enter city name"
-          className="flex-grow p-2.5 pl-4 text-base sm:p-3 sm:pl-6 sm:text-lg bg-transparent text-white placeholder-gray-200 focus:outline-none focus:ring-2 focus:ring-white/60 rounded-full"
+          className="w-full p-3 pl-5 pr-28 text-base sm:text-lg bg-white/15 backdrop-blur-lg text-white placeholder-white/80 rounded-full shadow-xl focus:outline-none focus:ring-2 focus:ring-white/60"
           disabled={isLoading}
           aria-haspopup="listbox"
           aria-expanded={showSuggestions}
@@ -101,7 +98,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <button
           type="submit"
           disabled={isLoading || !cityInput.trim()}
-          className="bg-white/30 hover:bg-white/50 text-white font-semibold py-2.5 px-4 text-base sm:py-3 sm:px-6 sm:text-lg rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-white/30 hover:bg-white/50 text-white font-semibold py-2 px-4 text-sm sm:text-base rounded-full transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-white/50 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isLoading ? (
             <svg
@@ -129,6 +126,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           )}
         </button>
       </form>
+
       {showSuggestions && history.length > 0 && (
         <ul
           className="absolute top-full left-0 right-0 mt-1 bg-white/20 backdrop-blur-lg border border-white/30 rounded-lg shadow-2xl z-10 overflow-hidden max-h-60 overflow-y-auto"
